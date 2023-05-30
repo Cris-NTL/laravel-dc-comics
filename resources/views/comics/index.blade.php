@@ -10,7 +10,7 @@
                 <img src="{{ $comic->thumb }}" alt="{{ $comic->title }}">
                 <p>Series: {{ $comic->series }}</p>
                 <p>Type: {{ $comic->type }}</p>
-                <a href="{{ route('comics.show', $comic) }}">View Details</a>
+                <a href="{{ route('comics.show', ['comic' => $comic->id]) }}">View Details</a>
             </div>
         @endforeach
 
