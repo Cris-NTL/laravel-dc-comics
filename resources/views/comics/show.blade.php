@@ -11,6 +11,7 @@
                 <p>Price: {{ $comic->price }}</p>
                 <p>Sale date: {{ $comic->sale_date }}</p>
                 <p>Type: {{ $comic->type }}</p>
+                <a href="{{ route('comics.edit', $comic) }}">Edit</a>
             </div>
         @else
             <h1>No Comic Found</h1>
