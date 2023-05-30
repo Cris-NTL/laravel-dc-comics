@@ -1,1 +1,25 @@
 @import '~bootstrap/scss/bootstrap';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+}
+
+.show_img {
+    border-radius: 15px;
+}
+
+.show_details {
+    background-color: rgba(191, 191, 191, 0.182);
+    border-radius: 15px;
+}
+
+.row {
+    background-color: rgba(191, 191, 191, 0.182);
+    border-radius: 15px;
+}

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-4">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-8 py-5">
                 <div class="card">
                     <div class="card-header bg-primary text-white text-center">
                         <h1 class="display-4">Edit Comic</h1>
@@ -32,7 +32,7 @@
 
                             <div class="form-group">
                                 <label class="fw-bold my-1" for="price">Price</label>
-                                <input type="number" name="price" id="price" class="form-control"
+                                <input type="number" name="price" min="0" id="price" class="form-control"
                                     value="{{ $comic->price }}" required>
                             </div>
 
@@ -62,5 +62,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete Comic</button>
                         </form>
+
+                        <a href="{{ route('home') }}" class="btn btn-primary mt-3">Home</a>
                     </div>
                 @endsection
