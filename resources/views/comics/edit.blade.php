@@ -60,7 +60,7 @@
                         <form action="{{ route('comics.destroy', $comic) }}" method="POST" class="mt-3">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete Comic</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this comic?')">Delete Comic</button>
                         </form>
 
                         <a href="{{ route('home') }}" class="btn btn-primary mt-3">Home</a>

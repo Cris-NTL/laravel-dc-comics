@@ -8,11 +8,11 @@
 
         <div class="row py-5">
             @foreach ($comics as $comic)
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
                         <img src="{{ $comic->thumb }}" class="card-img-top" alt="{{ $comic->title }}">
                         <div class="card-body d-flex flex-column">
-                            <h2 class="card-title">{{ $comic->title }}</h2>
+                            <h6 class="card-title">{{ $comic->title }}</h6>
                             <p class="card-text">Series: {{ $comic->series }}</p>
                             <p class="card-text">Type: {{ $comic->type }}</p>
                             <div class="mb-2 mt-auto">
