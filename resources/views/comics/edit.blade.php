@@ -50,5 +50,11 @@
 
             <button type="submit" class="btn btn-primary">Update Comic</button>
         </form>
+
+        <form action="{{ route('comics.destroy', $comic) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete Comic</button>
+        </form>
     </div>
 @endsection
