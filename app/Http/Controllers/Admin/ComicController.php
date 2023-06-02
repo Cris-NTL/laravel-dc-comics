@@ -37,16 +37,31 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+        //! Data validation (make the application more stable)
+        $request->validate([
+            'title' => 'required|min:5|max:100',
+            'description' => 'required|min:15|max:1000',
+            'thumb' => 'required|url|regex:/^https:.*/',
+            'price' => 'required|numeric|min:0.01',
+            'series' => 'required|min:8|max:30',
+            'sale_date' => 'required|date',
+            'type' => 'required|min:2|max:30',
+        ]);
+
+        $data = $request->all();
         $comic = new Comic();
-        $comic->title = $request->title;
-        $comic->description = $request->description;
-        $comic->thumb = $request->thumb;
-        $comic->price = $request->price;
-        $comic->series = $request->series;
-        $comic->type = $request->type;
-        $comic->sale_date = $request->sale_date;
+        $comic->fill($data);
         $comic->save();
         return redirect()->route('comics.index');
+
+        //? old method (without data validation) commented out
+        // $comic->title = $request->title;
+        // $comic->description = $request->description;
+        // $comic->thumb = $request->thumb;
+        // $comic->price = $request->price;
+        // $comic->series = $request->series;
+        // $comic->type = $request->type;
+        // $comic->sale_date = $request->sale_date;
     }
 
     /**
@@ -58,7 +73,6 @@ class ComicController extends Controller
     public function show($id)
     {
         $comic = Comic::findOrFail($id);
-        // dd($id);
         return view('comics.show', ['comic' => $comic]);
     }
 
@@ -84,17 +98,30 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //! Data validation (make the application more stable)
+        $request->validate([
+            'title' => 'required|min:5|max:100',
+            'description' => 'required|min:15|max:1000',
+            'thumb' => 'required|url|regex:/^https:.*/',
+            'price' => 'required|numeric|min:0.01',
+            'series' => 'required|min:8|max:30',
+            'sale_date' => 'required|date',
+            'type' => 'required|min:2|max:30',
+        ]);
 
         $data = $request->all();
         $comic = Comic::findOrFail($id);
-        $comic->title = $data['title'];
-        $comic->description = $data['description'];
-        $comic->thumb = $data['thumb'];
-        $comic->price = $data['price'];
-        $comic->sale_date = $data['sale_date'];
-        $comic->type = $data['type'];
+        $comic->fill($data);
         $comic->save();
         return redirect()->route('comics.show', $comic->id);
+
+        //? old method (without data validation) commented out
+        // $comic->title = $data['title'];
+        // $comic->description = $data['description'];
+        // $comic->thumb = $data['thumb'];
+        // $comic->price = $data['price'];
+        // $comic->sale_date = $data['sale_date'];
+        // $comic->type = $data['type'];
     }
 
     /**
