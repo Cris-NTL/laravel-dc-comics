@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
 use App\Models\Comic;
 
@@ -35,26 +36,27 @@ class ComicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //! Data validation (make the application more stable)
-        $request->validate([
-            'title' => 'required|min:5|max:100',
-            'description' => 'required|min:15|max:1000',
-            'thumb' => 'required|url|regex:/^https:.*/',
-            'price' => 'required|numeric|min:0.01',
-            'series' => 'required|min:8|max:30',
-            'sale_date' => 'required|date',
-            'type' => 'required|min:2|max:30',
-        ]);
-
+        //! Validation of data -> StorePostRequest
         $data = $request->all();
         $comic = new Comic();
         $comic->fill($data);
         $comic->save();
         return redirect()->route('comics.index');
 
-        //? old method (without data validation) commented out
+        //? (DEPRECATED) Data validation (make the application more stable)
+        // $request->validate([
+        //     'title' => 'required|min:5|max:100',
+        //     'description' => 'required|min:15|max:1000',
+        //     'thumb' => 'required|url|regex:/^https:.*/',
+        //     'price' => 'required|numeric|min:0.01',
+        //     'series' => 'required|min:8|max:30',
+        //     'sale_date' => 'required|date',
+        //     'type' => 'required|min:2|max:30',
+        // ]);
+
+        //? (DEPRECATED) Old method (without data validation) commented out
         // $comic->title = $request->title;
         // $comic->description = $request->description;
         // $comic->thumb = $request->thumb;
@@ -96,26 +98,27 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePostRequest $request, $id)
     {
-        //! Data validation (make the application more stable)
-        $request->validate([
-            'title' => 'required|min:5|max:100',
-            'description' => 'required|min:15|max:1000',
-            'thumb' => 'required|url|regex:/^https:.*/',
-            'price' => 'required|numeric|min:0.01',
-            'series' => 'required|min:8|max:30',
-            'sale_date' => 'required|date',
-            'type' => 'required|min:2|max:30',
-        ]);
-
+        //! Validation of data -> StorePostRequest
         $data = $request->all();
         $comic = Comic::findOrFail($id);
         $comic->fill($data);
         $comic->save();
         return redirect()->route('comics.show', $comic->id);
 
-        //? old method (without data validation) commented out
+        //? (DEPRECATED) Data validation (make the application more stable)
+        // $request->validate([
+        //     'title' => 'required|min:5|max:100',
+        //     'description' => 'required|min:15|max:1000',
+        //     'thumb' => 'required|url|regex:/^https:.*/',
+        //     'price' => 'required|numeric|min:0.01',
+        //     'series' => 'required|min:8|max:30',
+        //     'sale_date' => 'required|date',
+        //     'type' => 'required|min:2|max:30',
+        // ]);
+
+        //? (DEPRECATED) Old method (without data validation) commented out
         // $comic->title = $data['title'];
         // $comic->description = $data['description'];
         // $comic->thumb = $data['thumb'];
